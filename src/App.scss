@@ -1,0 +1,15 @@
+:root {
+  --main-color: #08262e;
+  --secondary-color: #41bcc3;
+}
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+
+  .wrapper {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+  }
+}
