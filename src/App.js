@@ -10,9 +10,13 @@ function App() {
   const [tabs, setTabs] = useState([]);
   const [showRight, setShowRight] = useState(true);
   const addTab = (tabToBeAdded) => {
-    const tab = { title: tabToBeAdded, isOpen: true, isCurrentTab: true };
+    const tab = { title: tabToBeAdded, isOpen: true, isActive: true };
     const prevTabs = [...tabs];
     prevTabs.push(tab);
+    for (let i = 0; i < prevTabs.length - 1; i++) {
+      prevTabs[i].isActive = false;
+    }
+
     prevTabs.length <= 4 && setTabs(prevTabs);
   };
 

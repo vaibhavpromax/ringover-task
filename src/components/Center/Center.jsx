@@ -11,21 +11,22 @@ import tabContext from "../tab-context";
 const Center = () => {
   const tabInfo = useContext(tabContext);
 
-  const onClickHandler = (tab, index) => {
-    tabInfo.tabs[index].isActive = true;
-    for (let i = 0; i < tabInfo.tabs.length; i++) {
+  const clickHandler = (index) => {
+    const prevTabs = [...tabInfo.tabs];
+    prevTabs[index].isActive = true;
+    for (let i = 0; i < prevTabs.length; i++) {
       if (i !== index) {
-        tabInfo.tabs[i].isActive = false;
+        prevTabs[i].isActive = false;
       }
     }
-    tabInfo.setTabs(tabInfo.tabs);
+    tabInfo.setTabs(prevTabs);
   };
 
   const onCloseHandler = (tab, index) => {
     const prevTabs = [...tabInfo.tabs];
     const newTabs = prevTabs.splice(index, 1);
+    prevTabs[prevTabs.length - 1].isActive = true;
     tabInfo.setTabs(prevTabs);
-    // console.log(tabInfo.tabs);
   };
 
   return (
@@ -40,12 +41,13 @@ const Center = () => {
       <div className="tabs">
         {tabInfo.tabs.map((tab, index) => {
           return (
-            <div
-              className={`tab ${tab.isActive ? "active" : ""}`}
-              onClick={onClickHandler(tab, index)}
-              key={index}
-            >
-              {tab.isOpen && tab.title}
+            <div className={`tab ${tab.isActive ? "active" : ""}`} key={index}>
+              <div
+                style={{ width: "100%" }}
+                onClick={() => clickHandler(index)}
+              >
+                {tab.isOpen && tab.title}
+              </div>
               <img
                 onClick={() => onCloseHandler(tab, index)}
                 src={close}
