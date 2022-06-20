@@ -10,16 +10,24 @@ function App() {
   const [tabs, setTabs] = useState([]);
   const [currentTab, setCurrentTab] = useState("");
   const addTab = (tabToBeAdded) => {
-    tabs.length < 4 && setTabs([...tabs, tabToBeAdded]);
-    setCurrentTab(tabToBeAdded);
+    // tabs.length < 4 &&
+    //   setTabs([...tabs, { title: tabToBeAdded, isOpen: true }]);
+    // setCurrentTab(tabToBeAdded);
+    const tab = { title: tabToBeAdded, isOpen: true, isCurrentTab: true };
+    const prevTabs = [...tabs];
+    prevTabs.push(tab);
+    // console.log(prevTabs);
+    prevTabs.length <= 4 && setTabs(prevTabs);
+
+    // console.log(tabs);
   };
 
   return (
     <tabContext.Provider
       value={{
         tabs: tabs,
-        currentTab: currentTab,
-        setCurrentTab: setCurrentTab,
+        // currentTab: currentTab,
+        // setCurrentTab: setCurrentTab,
         addTab: addTab,
         setTabs: setTabs,
       }}

@@ -11,18 +11,19 @@ import tabContext from "../tab-context";
 const Center = () => {
   const tabInfo = useContext(tabContext);
 
-  const onClickHandler = (e) => {
-    tabInfo.setCurrentTab(e.target.innerText);
+  const onClickHandler = (tab, index) => {
+    const prevTabs = [...tabInfo.tabs];
+    // console.log(prevTabs);
+    prevTabs[index].isActive = true;
+    prevTabs.splice(index, 1);
+    const inActiveTabs = prevTabs.map((tab) => (tab.isActive = false));
+    console.log(inActiveTabs);
   };
-  const onCloseHandler = (currentTab) => {
-    // const remainingTabs = tabInfo.tabs.filter(
-    //   (tab) => tab !== tabInfo.currentTab
-    //   );
-    const remainingTabs = tabInfo.tabs.splice(currentTab, 1);
-    console.log(currentTab);
-    console.log(remainingTabs);
-    tabInfo.setTabs(remainingTabs);
-    // tabInfo.setCurrentTab(remainingTabs[-1]);
+  const onCloseHandler = (tab, index) => {
+    const prevTabs = [...tabInfo.tabs];
+    const newTabs = prevTabs.splice(index, 1);
+    tabInfo.setTabs(prevTabs);
+    // console.log(tabInfo.tabs);
   };
 
   return (
@@ -37,9 +38,17 @@ const Center = () => {
       <div className="tabs">
         {tabInfo.tabs.map((tab, index) => {
           return (
-            <div className="tab" onClick={onClickHandler} key={index}>
-              {tab}
-              <img onClick={() => onCloseHandler(index)} src={close} alt="" />
+            <div
+              className={`tab ${tab.isActive ? "active" : ""}`}
+              onClick={onClickHandler(tab, index)}
+              key={index}
+            >
+              {tab.isOpen && tab.title}
+              <img
+                onClick={() => onCloseHandler(tab, index)}
+                src={close}
+                alt=""
+              />
             </div>
           );
         })}
@@ -51,7 +60,12 @@ const Center = () => {
           <p>To add a tab click on any option on your bottom left</p>
         </div>
       ) : (
-        <div className="selected-activity">{tabInfo.currentTab} Activity</div>
+        <div className="selected-activity">
+          {tabInfo.tabs.map((tab) => {
+            return tab.isActive && tab.title;
+          })}
+          {"  "}Activity
+        </div>
       )}
     </div>
   );

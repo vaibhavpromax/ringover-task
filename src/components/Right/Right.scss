@@ -83,13 +83,13 @@
     justify-content: center;
     height: 100%;
   }
+}
 
-  @media (min-width: 900px) {
-    .right {
+@media (max-width: 900px) {
+  .right {
+    display: none;
+    img {
       display: none;
-      img {
-        display: none;
-      }
     }
   }
 }
