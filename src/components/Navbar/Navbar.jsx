@@ -9,7 +9,7 @@ import exit from "../../assets/exit.png";
 import search from "../../assets/search.png";
 import menu from "../../assets/menu.png";
 
-const Navbar = () => {
+const Navbar = ({ showRight, setShowRight }) => {
   return (
     <div className="navbar">
       <div className="name">
@@ -19,12 +19,19 @@ const Navbar = () => {
       <div className="search-bar">
         <input type="text" placeholder="Search" />
         <img className="search-icon" src={search} alt="" />
-    </div>
+      </div>
       <div className="user">
         <img className="user-icon" src={sampleUser} alt="" />
         <img src={switchLogo} alt="" />
         <img src={exit} alt="" />
-        <img onClick={()=>{}} className="menu-icon" src={menu} alt="" />
+        <img
+          onClick={() => {
+            setShowRight(true);
+          }}
+          className="menu-icon"
+          src={menu}
+          alt=""
+        />
       </div>
     </div>
   );

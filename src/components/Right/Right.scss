@@ -93,3 +93,11 @@
     }
   }
 }
+@media (min-width: 900px) {
+  .close-button {
+    display: none;
+  }
+  .right {
+    postion: fixed;
+  }
+}

@@ -12,13 +12,15 @@ const Center = () => {
   const tabInfo = useContext(tabContext);
 
   const onClickHandler = (tab, index) => {
-    const prevTabs = [...tabInfo.tabs];
-    // console.log(prevTabs);
-    prevTabs[index].isActive = true;
-    prevTabs.splice(index, 1);
-    const inActiveTabs = prevTabs.map((tab) => (tab.isActive = false));
-    console.log(inActiveTabs);
+    tabInfo.tabs[index].isActive = true;
+    for (let i = 0; i < tabInfo.tabs.length; i++) {
+      if (i !== index) {
+        tabInfo.tabs[i].isActive = false;
+      }
+    }
+    tabInfo.setTabs(tabInfo.tabs);
   };
+
   const onCloseHandler = (tab, index) => {
     const prevTabs = [...tabInfo.tabs];
     const newTabs = prevTabs.splice(index, 1);
@@ -55,6 +57,7 @@ const Center = () => {
       </div>
       {tabInfo.tabs.length === 0 ? (
         <div className="workspace">
+          8
           <img src={copyBoard} alt="" />
           <h2>Your Workspace is empty</h2>
           <p>To add a tab click on any option on your bottom left</p>

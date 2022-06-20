@@ -6,9 +6,10 @@ import "./Right.scss";
 import upload from "../../assets/upload.png";
 import pause from "../../assets/pause.png";
 import stop from "../../assets/stop.png";
+import darkClose from "../../assets/darkClose.png";
 import { useState } from "react";
 
-const Right = () => {
+const Right = ({ showRight, setShowRight }) => {
   const [activity, setActivity] = useState("Activity");
 
   return (
@@ -22,6 +23,9 @@ const Right = () => {
           <img src={pause} alt="" />
           <img src={stop} alt="" />
         </div>
+        {/* {showRight === false && <img src={darkClose} alt="" />}
+         */}
+              <img className="close-button" src={darkClose} alt="" />
       </div>
       <hr />
       <div className="button-wrapper">
