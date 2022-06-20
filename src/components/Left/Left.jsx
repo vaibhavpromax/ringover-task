@@ -94,10 +94,7 @@ const Left = () => {
         </div>
       </div>
       <div className="function-row">
-        <div>
-          <img src={phoneLogo} alt="" />
-        </div>
-
+        <img  src={phoneLogo} alt="" />
         <div className="icons-wrapper">
           <img onClick={() => tabInfo.addTab("Video")} src={video} alt="" />
           <img
