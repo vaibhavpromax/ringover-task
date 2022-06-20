@@ -25,7 +25,12 @@ const Center = () => {
   const onCloseHandler = (tab, index) => {
     const prevTabs = [...tabInfo.tabs];
     const newTabs = prevTabs.splice(index, 1);
-    prevTabs[prevTabs.length - 1].isActive = true;
+    if (index !== 0) {
+      prevTabs[index - 1].isActive = true;
+    }
+    // prevTabs.length !== 1
+    //   ? (prevTabs[prevTabs.length - 1].isActive = true)
+    //     :   (prevTabs[0].isActive = true);
     tabInfo.setTabs(prevTabs);
   };
 
